@@ -1,149 +1,221 @@
-# AutoLuxe
+# Autoluxe - Luxury Car Rental Platform
 
-A luxury car rental platform based in Dubai, UAE. This application allows users to browse, search, and rent premium luxury vehicles, with a streamlined booking process and customer support via WhatsApp.
+A modern, full-stack car rental platform built with Next.js 15, Supabase, and TypeScript. Autoluxe provides a premium car rental experience with advanced search, filtering, and booking capabilities.
 
-## Project Overview
+## 🚀 Features
 
-AutoLuxe is built using modern web technologies:
+- **Modern UI/UX**: Beautiful, responsive design with smooth animations
+- **Advanced Search**: Real-time search with Algolia integration
+- **Car Management**: Comprehensive car listing and management system
+- **Brand Management**: Multi-brand car rental platform
+- **Admin Dashboard**: Full-featured admin panel for content management
+- **Image Management**: Cloud storage with Supabase Storage
+- **Authentication**: Secure admin authentication system
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **TypeScript**: Full type safety throughout the application
+- **SEO Optimized**: Meta tags, structured data, and performance optimized
 
-- **Frontend**: Next.js 15, React 19, Tailwind CSS
-- **Backend**: Firebase (Authentication, Firestore, Storage, Functions)
-- **Search**: Algolia for advanced search capabilities
-- **Deployment**: Firebase Hosting with GitHub Actions CI/CD
+## 🛠 Tech Stack
 
-## Features
+- **Frontend**: Next.js 15, React 18, TypeScript
+- **Styling**: Tailwind CSS, CSS Modules
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Storage**: Supabase Storage
+- **Search**: Algolia
+- **Deployment**: Vercel
+- **UI Components**: Custom component library with shadcn/ui
 
-- Luxury car listings with detailed specifications and high-quality images
-- Advanced search and filtering by car type, brand, price range, etc.
-- User authentication and profile management
-- Booking and reservation system
-- Direct customer support via WhatsApp integration
-- Responsive design for all devices
+## 📁 Project Structure
 
-## Getting Started
+```
+autoluxe-main/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── admin/             # Admin dashboard
+│   │   ├── api/               # API routes
+│   │   ├── car/               # Car detail pages
+│   │   ├── brand/             # Brand pages
+│   │   ├── category/          # Category pages
+│   │   └── home/              # Homepage components
+│   ├── components/            # Reusable components
+│   ├── lib/                   # Utility libraries
+│   ├── services/              # API services
+│   └── types/                 # TypeScript type definitions
+├── supabase/                  # Supabase configuration
+├── scripts/                   # Migration and setup scripts
+└── public/                    # Static assets
+```
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (v18+ recommended)
+- Node.js 18+ 
 - npm or yarn
-- Firebase account
-- Algolia account (for search functionality)
+- Supabase account
+- Algolia account (optional, for search functionality)
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd autoluxe-main
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp env.example .env.local
+   ```
+   
+   Fill in your environment variables:
+   ```env
+   # Supabase
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+   
+   # Algolia (optional)
+   NEXT_PUBLIC_ALGOLIA_APP_ID=your_algolia_app_id
+   NEXT_PUBLIC_ALGOLIA_SEARCH_KEY=your_algolia_search_key
+   ALGOLIA_ADMIN_KEY=your_algolia_admin_key
+   
+   # Admin Authentication
+   ADMIN_USERNAME=your_admin_username
+   ADMIN_PASSWORD=your_admin_password
+   ```
+
+4. **Set up Supabase**
+   ```bash
+   # Install Supabase CLI
+   npm install -g supabase
+   
+   # Start Supabase locally (optional)
+   supabase start
+   
+   # Run migrations
+   supabase db push
+   ```
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 🗄 Database Setup
+
+The project uses Supabase with the following main tables:
+
+- **cars**: Car listings with details, images, and pricing
+- **brands**: Car brands with logos and descriptions
+- **categories**: Car categories (type, fuel, etc.)
+- **users**: Admin users for authentication
+
+Run the migration scripts to set up the database:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/autoluxe.git
-cd autoluxe
+# Create tables
+npm run scripts:create-tables
+
+# Verify tables
+npm run scripts:verify-tables
 ```
 
-2. Install dependencies:
+## 🔧 Available Scripts
 
-```bash
-npm install
-```
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run type-check` - Run TypeScript type checking
 
-3. Create a `.env.local` file in the root directory with your Firebase and Algolia credentials:
+## 🚀 Deployment
 
-```env
-NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
-NEXT_PUBLIC_ALGOLIA_APP_ID=your_algolia_app_id
-NEXT_PUBLIC_ALGOLIA_SEARCH_KEY=your_algolia_search_key
-```
+### Vercel Deployment
 
-### Development
+1. **Connect to Vercel**
+   - Push your code to GitHub
+   - Connect your repository to Vercel
+   - Add environment variables in Vercel dashboard
 
-Run the development server:
+2. **Deploy**
+   - Vercel will automatically deploy on push to main branch
+   - Preview deployments for pull requests
 
-```bash
-npm run dev
-```
+### Environment Variables for Production
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+Make sure to set these in your Vercel dashboard:
 
-## Deployment
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXT_PUBLIC_ALGOLIA_APP_ID`
+- `NEXT_PUBLIC_ALGOLIA_SEARCH_KEY`
+- `ALGOLIA_ADMIN_KEY`
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD`
 
-### GitHub Setup
+## 📱 Features Overview
 
-1. Initialize Git in the project directory (if not already done):
+### For Users
+- Browse luxury cars by brand, category, and type
+- Advanced search and filtering
+- Detailed car specifications and images
+- Responsive design for all devices
 
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-```
+### For Admins
+- Secure admin dashboard
+- Car management (add, edit, delete)
+- Brand management
+- Category management
+- Image upload and management
+- Analytics and insights
 
-2. Create a new repository on GitHub and link it:
+## 🔒 Security
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/autoluxe.git
-git push -u origin main
-```
+- Row Level Security (RLS) in Supabase
+- Admin authentication
+- Secure API routes
+- Environment variable protection
+- Input validation and sanitization
 
-### GitHub Actions for Firebase Deployment
+## 📈 Performance
 
-We've set up a GitHub Actions workflow (`.github/workflows/firebase-deploy.yml`) that automatically builds and deploys the application to Firebase Hosting whenever changes are pushed to the main branch.
+- Next.js 15 App Router for optimal performance
+- Image optimization with Next.js Image component
+- Code splitting and lazy loading
+- SEO optimization
+- CDN integration with Vercel
 
-To make this work:
+## 🤝 Contributing
 
-1. Set up the following secrets in your GitHub repository (Settings > Secrets > Actions):
-   - `FIREBASE_API_KEY`
-   - `FIREBASE_AUTH_DOMAIN`
-   - `FIREBASE_PROJECT_ID`
-   - `FIREBASE_STORAGE_BUCKET`
-   - `FIREBASE_MESSAGING_SENDER_ID`
-   - `FIREBASE_APP_ID`
-   - `ALGOLIA_APP_ID`
-   - `ALGOLIA_SEARCH_KEY`
-   - `FIREBASE_SERVICE_ACCOUNT` (a JSON key for a service account with deployment permissions)
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-2. Commit and push changes to the main branch to trigger the deployment:
+## 📄 License
 
-```bash
-git push origin main
-```
+This project is licensed under the MIT License.
 
-### Manual Firebase Deployment
+## 🆘 Support
 
-If you prefer to deploy manually:
+For support and questions:
+- Create an issue in the repository
+- Check the documentation
+- Review the migration status in `MIGRATION_STATUS.md`
 
-1. Build the production version of the app:
+## 🔄 Migration Status
 
-```bash
-npm run build
-npx next export
-```
-
-2. Deploy to Firebase:
-
-```bash
-firebase deploy
-```
-
-## Project Structure
-
-- `/src/app` - Next.js app router pages and layouts
-- `/src/components` - React components
-- `/src/contexts` - Context providers (including CarHireContext)
-- `/functions` - Firebase Cloud Functions
-- `/public` - Static assets
-
-## Recent Changes
-
-- Added WhatsApp integration to the homepage hero section for direct customer inquiries
-- Set up CI/CD pipeline with GitHub Actions for automated deployment
-
-## Contributors
-
-- Your Name - Lead Developer
-
-## License
-
-This project is proprietary. All rights reserved.
+This project has been migrated from Firebase to Supabase. See `MIGRATION_STATUS.md` for detailed information about the migration process and current status.
 
