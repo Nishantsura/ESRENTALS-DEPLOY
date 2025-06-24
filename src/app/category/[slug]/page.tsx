@@ -40,7 +40,7 @@ export default function CategoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <PageHeader title="Loading..." />
         <div className="container mx-auto px-4 py-8">
           <SearchResultsSkeleton />
@@ -50,7 +50,7 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <PageHeader title={decodeURIComponent(slug).toUpperCase()} />
       <div className="container mx-auto px-4 py-8">
         {cars.length > 0 ? (

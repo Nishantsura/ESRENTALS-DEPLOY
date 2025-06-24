@@ -18,7 +18,6 @@ import { carService } from "@/services/carService"
 import { TiltedCarCard } from '@/components/car/TiltedCarCard'
 import Image from 'next/image'
 import { Card, CardContent } from "@/components/ui/card"
-import { Header } from "@/app/home/components/Header"
 import { useCarHire } from "@/contexts/CarHireContext"
 import { FaWhatsapp } from "react-icons/fa"
 

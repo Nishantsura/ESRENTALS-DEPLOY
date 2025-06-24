@@ -20,11 +20,12 @@ interface NavBarProps {
 
 export function NavBar({ items, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items[0].name)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
+      // Only show on desktop (1024px and above)
+      setIsDesktop(window.innerWidth >= 1024)
     }
 
     handleResize()
@@ -32,16 +33,20 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  // Don't render on mobile/tablet since we have hamburger menu
+  if (!isDesktop) {
+    return null
+  }
+
   return (
     <div
       className={cn(
-        "fixed bottom-0 sm:static z-50 mb-6 sm:mb-0 sm:py-3 mx-auto w-full flex justify-center items-center",
+        "static z-50 py-3 mx-auto w-full flex justify-center items-center",
         className,
       )}
     >
       <div className="flex items-center justify-center gap-2 bg-background/10 border border-border/50 backdrop-blur-lg py-1 px-2 rounded-full shadow-lg max-w-fit mx-auto hover:border-primary/20 transition-all duration-300">
         {items.map((item) => {
-          const Icon = item.icon
           const isActive = activeTab === item.name
 
           return (
@@ -55,10 +60,7 @@ export function NavBar({ items, className }: NavBarProps) {
                 isActive && "bg-primary text-black",
               )}
             >
-              <span className="hidden md:inline">{item.name}</span>
-              <span className={cn("md:hidden", item.color)}>
-                <Icon size={18} strokeWidth={2.5} />
-              </span>
+              <span>{item.name}</span>
               {isActive && (
                 <motion.div
                   layoutId="lamp"
