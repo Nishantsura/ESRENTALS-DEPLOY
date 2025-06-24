@@ -70,7 +70,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-[100vw] h-auto min-h-[100vh] flex items-center justify-center py-16 md:py-24 overflow-hidden mx-0 px-0 max-w-none left-[50%] right-[50%] ml-[-50vw] mr-[-50vw] -translate-x-0">
+    <section className="relative w-[100vw] h-screen flex items-center justify-center overflow-hidden mx-0 px-0 max-w-none left-[50%] right-[50%] ml-[-50vw] mr-[-50vw] -translate-x-0">
       {/* Background video with overlay */}
       <div className="absolute inset-0 z-0 w-[100vw] h-screen left-0 right-0">
         <video 
@@ -92,7 +92,7 @@ export default function HeroSection() {
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             Experience Luxury on Wheels
           </h1>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl">
+          <p className="text-xl text-gray-200 mb-8 w-full max-w-4xl mx-auto text-center">
             Discover Dubai&apos;s finest collection of premium vehicles. From sleek sports cars to elegant SUVs, we&apos;ve got your perfect ride.
           </p>
         </div>
