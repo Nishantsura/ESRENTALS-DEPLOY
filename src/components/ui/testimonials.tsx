@@ -101,7 +101,7 @@ function TestimonialsColumn({
                 >
                   <p className="text-sm text-foreground/90 leading-relaxed">"{testimonial.testimonial}"</p>
                   <div className="flex flex-col mt-4">
-                    <div className="font-medium text-sm tracking-tight leading-5 text-teal-500 dark:text-teal-400">
+                    <div className="font-medium text-sm tracking-tight leading-5 text-teal-400">
                       {testimonial.author || testimonial.by}
                     </div>
                     <div className="text-xs text-muted-foreground mt-1">

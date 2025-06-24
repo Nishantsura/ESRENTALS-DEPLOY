@@ -8,9 +8,9 @@ const supabase = createClient(
 
 export async function GET(
   request: Request,
-  context: { params: { type: string } }
+  context: { params: Promise<{ type: string }> }
 ) {
-  const { type } = context.params;
+  const { type } = await context.params;
   const validTypes = ['carType', 'fuelType', 'tag'];
   if (!type || !validTypes.includes(type)) {
     return NextResponse.json(

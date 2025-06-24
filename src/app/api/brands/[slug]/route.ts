@@ -8,9 +8,9 @@ const supabase = createClient(
 
 export async function GET(
   request: Request,
-  context: { params: { slug: string } }
+  context: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = context.params;
+  const { slug } = await context.params;
   if (!slug) {
     return NextResponse.json({ message: 'Missing slug' }, { status: 400 });
   }
@@ -37,8 +37,8 @@ export async function GET(
   }
 }
 
-export async function PUT(request: Request, context: { params: { slug: string } }) {
-  const { slug } = context.params;
+export async function PUT(request: Request, context: { params: Promise<{ slug: string }> }) {
+  const { slug } = await context.params;
   const body = await request.json();
   try {
     const { data, error } = await supabase

@@ -2,69 +2,46 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'dark';
 
 type ThemeProviderProps = {
   children: React.ReactNode;
-  defaultTheme?: Theme;
   storageKey?: string;
 };
 
 type ThemeProviderState = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-  toggleTheme: () => void;
 };
 
 const initialState: ThemeProviderState = {
-  theme: 'light',
+  theme: 'dark',
   setTheme: () => null,
-  toggleTheme: () => null,
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = 'light',
   storageKey = 'autoluxe-theme',
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem(storageKey) as Theme | null;
-    
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else {
-      // Check for system preference
-      const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(userPrefersDark ? 'dark' : 'light');
-      
-      // Save the theme to localStorage
-      localStorage.setItem(storageKey, userPrefersDark ? 'dark' : 'light');
-    }
-  }, [storageKey]);
+  const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
     const root = window.document.documentElement;
     
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
+    // Always set dark mode
+    root.classList.remove('light');
+    root.classList.add('dark');
 
-    // Update localStorage
-    localStorage.setItem(storageKey, theme);
-  }, [theme, storageKey]);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
+    // Update localStorage to always be dark
+    localStorage.setItem(storageKey, 'dark');
+  }, [storageKey]);
 
   const value = {
     theme,
     setTheme,
-    toggleTheme,
   };
 
   return (

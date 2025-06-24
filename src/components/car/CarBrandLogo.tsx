@@ -34,7 +34,7 @@ export function CarBrandLogo({ brand }: CarBrandLogoProps) {
   }
 
   return (
-    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white">
+    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-card">
       <Image
         src={brandData.logo}
         alt={`${brandData.name} logo`}

@@ -9,9 +9,9 @@ const supabase = createClient(
 
 export async function GET(
   request: Request,
-  context: { params: { brand: string } }
+  context: { params: Promise<{ brand: string }> }
 ) {
-  const { brand } = context.params;
+  const { brand } = await context.params;
   if (!brand) {
     return NextResponse.json({ message: 'Missing brand' }, { status: 400 });
   }

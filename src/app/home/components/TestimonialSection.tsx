@@ -61,7 +61,7 @@ const TestimonialCard: React.FC<{ quote: string; author: string; location: strin
   imageUrl,
 }) => {
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md flex flex-col items-center text-center h-full">
+    <div className="bg-card p-8 rounded-lg shadow-md flex flex-col items-center text-center h-full">
       {imageUrl ? (
         <img src={imageUrl} alt={author} className="w-20 h-20 rounded-full mb-5 object-cover" />
       ) : (

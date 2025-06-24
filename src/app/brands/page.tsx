@@ -40,7 +40,7 @@ export default function BrandsPage() {
         {/* Header now rendered globally in RootLayout */}
         
         <div className="container mx-auto pt-12 pb-8 px-4">
-          <h1 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white">All Brands</h1>
+          <h1 className="text-3xl font-bold text-center mb-10 text-white">All Brands</h1>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
             {[...Array(10)].map((_, index) => (
               <BrandDetailsSkeleton key={index} />
@@ -56,7 +56,7 @@ export default function BrandsPage() {
       {/* Header now rendered globally in RootLayout */}
       
       <div className="container mx-auto pt-12 pb-8 px-4">
-        <h1 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white">All Brands</h1>
+        <h1 className="text-3xl font-bold text-center mb-10 text-white">All Brands</h1>
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
           {brands.map((brand: Brand) => (
@@ -64,7 +64,7 @@ export default function BrandsPage() {
               <Link
                 key={brand.id}
                 href={`/brand/${encodeURIComponent(brand.slug)}`}
-                className="p-6 bg-white/80 dark:bg-card/50 rounded-2xl flex flex-col items-center justify-center hover:bg-white dark:hover:bg-card transition-all duration-300 shadow-xl hover:shadow-2xl border border-gray-100 dark:border-border/30 backdrop-blur-sm group"
+                className="p-6 bg-card/50 rounded-2xl flex flex-col items-center justify-center hover:bg-card transition-all duration-300 shadow-xl hover:shadow-2xl border border-border/30 backdrop-blur-sm group"
               >
                 <div className="w-16 h-16 relative mb-3 group-hover:scale-110 transition-transform duration-300">
                   <Image
@@ -74,7 +74,7 @@ export default function BrandsPage() {
                     className="object-cover"
                   />
                 </div>
-                <span className="text-sm font-medium text-center text-gray-900 dark:text-white">{brand.name}</span>
+                <span className="text-sm font-medium text-center text-white">{brand.name}</span>
               </Link>
             ) : (
               <div key={brand.id} className="p-6 bg-red-100 rounded-2xl">

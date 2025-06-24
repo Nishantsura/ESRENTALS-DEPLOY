@@ -164,7 +164,7 @@ function FeaturedContent() {
       <FeaturesBenefits />
       <div className="relative w-full overflow-visible my-16">
         <div className="relative z-10 mb-14">
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-center text-white mb-2 px-4 tracking-tight">Hear From Our <span className="text-primary dark:text-primary">Happy Customers</span></h2>
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-center text-white mb-2 px-4 tracking-tight">Hear From Our <span className="text-primary">Happy Customers</span></h2>
           <p className="text-center text-white/70 max-w-md mx-auto">Read what our premium customers say about their luxury car rental experiences</p>
         </div>
         <StaggerTestimonials />

@@ -60,7 +60,7 @@ export function FeaturedBrands({ brands }: FeaturedBrandsProps) {
             <Link
               key={`${brand.id}-${index}`}
               href={`/brand/${encodeURIComponent(brand.slug)}`}
-              className="min-w-[150px] px-6 py-4 h-[120px] shrink-0 bg-white dark:bg-gray-800 rounded-2xl flex flex-col items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-300 ease-out shadow-sm border border-gray-100 dark:border-gray-700 group/brand"
+              className="min-w-[150px] px-6 py-4 h-[120px] shrink-0 bg-gray-800 rounded-2xl flex flex-col items-center justify-center hover:bg-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-300 ease-out shadow-sm border border-gray-700/30 group/brand"
             >
               <div className="w-14 h-14 relative group-hover/brand:scale-110 transition-transform duration-300 ease-out">
                 <Image
@@ -72,7 +72,7 @@ export function FeaturedBrands({ brands }: FeaturedBrandsProps) {
                   priority={index < 5}
                 />
               </div>
-              <span className="text-sm font-medium text-center whitespace-nowrap mt-2 text-gray-700 dark:text-gray-300 group-hover/brand:text-black dark:group-hover/brand:text-white transition-colors duration-300">{brand.name}</span>
+              <span className="text-sm font-medium text-gray-300 group-hover/brand:text-white transition-colors duration-300">{brand.name}</span>
             </Link>
           ))}
         </div>

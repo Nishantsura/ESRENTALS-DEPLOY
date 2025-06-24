@@ -9,16 +9,27 @@ import {
   Building2, 
   Settings, 
   LogOut, 
-  Menu,
-  X 
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 interface SidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isCollapsed: boolean;
+  onToggle: () => void;
 }
 
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+interface MenuItem {
+  title: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  children?: MenuItem[];
+}
+
+export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
 
@@ -50,27 +61,26 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
     <>
       {/* Mobile overlay */}
-      {isOpen && (
+      {isCollapsed && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={onClose}
+          onClick={onToggle}
         />
       )}
 
       {/* Sidebar */}
-      <div className={`
-        fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:z-auto
-      `}>
+      <div className={`fixed top-0 left-0 h-full w-64 bg-card shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
+        isCollapsed ? 'translate-x-0' : '-translate-x-full'
+      }`}>
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b">
             <h1 className="text-xl font-semibold text-gray-800">AutoLuxe Admin</h1>
             <button
-              onClick={onClose}
+              onClick={onToggle}
               className="lg:hidden p-2 rounded-md hover:bg-gray-100"
             >
-              <X className="w-5 h-5" />
+              <ChevronDown className="w-5 h-5" />
             </button>
           </div>
 
@@ -84,7 +94,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     <a
                       href={item.href}
                       className="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
-                      onClick={onClose}
+                      onClick={onToggle}
                     >
                       <Icon className="w-5 h-5 mr-3" />
                       {item.label}

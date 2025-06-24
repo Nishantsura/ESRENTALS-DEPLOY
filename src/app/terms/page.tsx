@@ -6,7 +6,7 @@ export default function TermsAndConditions() {
       <PageHeader title="Terms and Conditions" />
       
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8">
+        <div className="bg-card rounded-lg shadow-sm p-6 sm:p-8">
           <div className="prose prose-gray max-w-none">
             <section className="mb-8">
               <h2 className="heading-3 text-primary mb-4">1. Acceptance of Terms</h2>

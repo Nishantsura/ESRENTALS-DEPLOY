@@ -1,17 +1,17 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import type { NextRequest } from 'next/server';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-// Using @ts-ignore comment to bypass the type checking issue temporarily
-// @ts-ignore - Next.js App Router typings
-export async function GET(request, { params }) {
+export async function GET(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
   try {
-    const id = params.id;
+    const { id } = await context.params;
     console.log(`API Route: Fetching car details for ID: ${id} (Supabase)`);
 
     const { data, error } = await supabase
@@ -55,9 +55,9 @@ export async function GET(request, { params }) {
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
   try {
-    const id = params.id;
     const body = await request.json();
     // Only allow updating fields that exist in the schema, including brand_id
     const updateData = { ...body };

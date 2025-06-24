@@ -9,9 +9,9 @@ const supabase = createClient(
 // Next.js 15 route handler
 export async function GET(
   request: Request,
-  context: { params: { type: string } }
+  context: { params: Promise<{ type: string }> }
 ) {
-  const { type } = context.params;
+  const { type } = await context.params;
   
   try {
     // Validate type parameter
@@ -43,8 +43,8 @@ export async function GET(
   }
 }
 
-export async function PUT(request: Request, context: { params: { type: string } }) {
-  const { type } = context.params;
+export async function PUT(request: Request, context: { params: Promise<{ type: string }> }) {
+  const { type } = await context.params;
   const body = await request.json();
   const { id, ...updateData } = body;
   if (!id) {

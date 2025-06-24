@@ -42,7 +42,7 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="bg-white p-10 rounded-2xl shadow-lg w-full max-w-md border border-gray-100">
+      <div className="bg-card p-10 rounded-2xl shadow-lg w-full max-w-md border border-border">
         <h1 className="text-2xl font-medium mb-8 text-center text-gray-800">Admin Login</h1>
         
         {error && (

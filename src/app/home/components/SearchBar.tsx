@@ -122,7 +122,7 @@ export function SearchBar() {
         />
         
         {showDropdown && (query.trim() !== '') && (
-          <div className="absolute w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 max-h-[70vh] overflow-y-auto z-50">
+          <div className="absolute w-full mt-2 bg-card rounded-lg shadow-lg border border-border max-h-[70vh] overflow-y-auto z-50">
             {isLoading ? (
               <div className="p-4 text-center text-gray-500">Loading...</div>
             ) : (

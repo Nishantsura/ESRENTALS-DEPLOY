@@ -67,9 +67,9 @@ const thirdColumn = testimonials.slice(6);
 
 export function StaggerTestimonials() {
   return (
-    <section className="relative py-16 md:py-24 bg-background dark:bg-transparent">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_50%,rgba(36,36,36,0.06)_0%,rgba(36,36,36,0)_50%)] dark:bg-[radial-gradient(circle_at_15%_50%,rgba(255,255,255,0.03)_0%,rgba(255,255,255,0)_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_30%,rgba(36,36,36,0.08)_0%,rgba(36,36,36,0)_50%)] dark:bg-[radial-gradient(circle_at_85%_30%,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0)_45%)]" />
+    <section className="relative py-16 md:py-24 bg-transparent">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_50%,rgba(255,255,255,0.03)_0%,rgba(255,255,255,0)_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_30%,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0)_45%)]" />
 
       <div className="container z-10 mx-auto">
         <motion.div
@@ -83,7 +83,7 @@ export function StaggerTestimonials() {
             <div className="border border-border py-1 px-4 rounded-lg text-foreground/70 text-sm">Testimonials</div>
           </div>
 
-          <h2 className="font-heading text-heading-2 text-zinc-800 dark:text-white text-center">
+          <h2 className="font-heading text-heading-2 text-white text-center">
             Hear From Our <span className="text-teal-500">Happy Customers</span>
           </h2>
           <p className="text-center mt-4 text-foreground/70 max-w-md mx-auto">

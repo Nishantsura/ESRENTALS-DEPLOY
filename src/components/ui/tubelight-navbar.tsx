@@ -52,7 +52,7 @@ export function NavBar({ items, className }: NavBarProps) {
               className={cn(
                 "relative cursor-pointer text-sm font-semibold px-4 py-1.5 rounded-full transition-all duration-300",
                 "text-white hover:text-white hover:bg-primary/5",
-                isActive && "bg-white text-black",
+                isActive && "bg-primary text-black",
               )}
             >
               <span className="hidden md:inline">{item.name}</span>
@@ -70,10 +70,10 @@ export function NavBar({ items, className }: NavBarProps) {
                     damping: 30,
                   }}
                 >
-                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-gray-300 dark:bg-gray-500 rounded-t-full">
-                    <div className="absolute w-12 h-6 bg-gray-300/30 dark:bg-gray-400/30 rounded-full blur-md -top-2 -left-2" />
-                    <div className="absolute w-8 h-6 bg-gray-300/30 dark:bg-gray-400/30 rounded-full blur-md -top-1" />
-                    <div className="absolute w-4 h-4 bg-gray-300/30 dark:bg-gray-400/30 rounded-full blur-sm top-0 left-2" />
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-gray-500 rounded-t-full">
+                    <div className="absolute w-12 h-6 bg-gray-400/30 rounded-full blur-md -top-2 -left-2" />
+                    <div className="absolute w-8 h-6 bg-gray-400/30 rounded-full blur-md -top-1" />
+                    <div className="absolute w-4 h-4 bg-gray-400/30 rounded-full blur-sm top-0 left-2" />
                   </div>
                 </motion.div>
               )}

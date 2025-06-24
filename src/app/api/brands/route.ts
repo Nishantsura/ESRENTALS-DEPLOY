@@ -40,5 +40,48 @@ export async function GET(request: Request) {
   }
 }
 
+export async function POST(request: Request) {
+  // TODO: Replace with real admin authentication check
+  // if (!isAdmin(request)) {
+  //   return NextResponse.json({ type: 'auth', message: 'Unauthorized' }, { status: 401 });
+  // }
+
+  try {
+    const body = await request.json();
+    const { name, slug, logo, featured = false, description = '' } = body;
+
+    // Basic validation
+    if (!name || !slug || !logo) {
+      return NextResponse.json({ type: 'validation', message: 'Missing required fields: name, slug, logo' }, { status: 400 });
+    }
+
+    // Uniqueness check for slug
+    const { data: existing, error: findError } = await supabase
+      .from('brands')
+      .select('id')
+      .eq('slug', slug)
+      .single();
+    if (existing) {
+      return NextResponse.json({ type: 'uniqueness', message: 'Brand with this slug already exists' }, { status: 409 });
+    }
+    if (findError && findError.code !== 'PGRST116') { // Not found is OK
+      return NextResponse.json({ type: 'db', message: 'Database error during uniqueness check', details: findError.message }, { status: 500 });
+    }
+
+    // Insert new brand
+    const { data, error } = await supabase
+      .from('brands')
+      .insert([{ name, slug, logo, featured, description }])
+      .select()
+      .single();
+    if (error) {
+      return NextResponse.json({ type: 'db', message: 'Failed to create brand', details: error.message }, { status: 500 });
+    }
+    return NextResponse.json(data, { status: 201 });
+  } catch (error) {
+    return NextResponse.json({ type: 'server', message: 'Unexpected server error', details: String(error) }, { status: 500 });
+  }
+}
+
 // This setting ensures the API route is not cached and is always dynamic
 export const revalidate = 0;

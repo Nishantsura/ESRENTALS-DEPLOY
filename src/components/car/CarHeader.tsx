@@ -46,7 +46,7 @@ export function CarHeader({
   const returnRef = useRef(null);
   
   return (
-    <div className="sticky top-0 z-20 bg-zinc-900/95 dark:bg-black/90 backdrop-blur-2xl px-4 sm:px-6 lg:px-8 border-b border-zinc-800/30 dark:border-white/10">
+    <div className="sticky top-0 z-20 bg-black/90 backdrop-blur-2xl px-4 sm:px-6 lg:px-8 border-b border-white/10">
       <div className="flex items-center justify-between h-12 px-4 pt-2 max-w-7xl mx-auto">
         <div className="flex items-center">
           <Link href={previousPage === 'search' ? '/search' : '/'} className="mr-4">

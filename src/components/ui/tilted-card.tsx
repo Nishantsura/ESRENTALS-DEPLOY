@@ -43,7 +43,7 @@ export const TiltedCard: FC<TiltedCardProps> = ({
   overlayContent = null,
   displayOverlayContent = false,
   className = "",
-  tooltipClassName = "bg-white text-[#2d2d2d] dark:bg-neutral-800 dark:text-neutral-200", // Default theme-aware tooltip
+  tooltipClassName = "bg-neutral-800 text-neutral-200", // Dark mode only tooltip
 }) => {
   const ref = useRef<HTMLElement>(null);
   const x = useMotionValue(0);
@@ -124,7 +124,7 @@ export const TiltedCard: FC<TiltedCardProps> = ({
       }}
     >
       {showMobileWarning && (
-        <div className="absolute top-4 text-center text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 block sm:hidden z-10 p-2 bg-white/80 dark:bg-black/80 rounded">
+        <div className="absolute top-4 text-center text-xs sm:text-sm text-neutral-400 block sm:hidden z-10 p-2 bg-black/80 rounded">
           Tilt effect best on desktop.
         </div>
       )}

@@ -31,10 +31,10 @@ export const TestimonialsColumn = (props: {
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
               {props.testimonials.map((testimonial, i) => (
-                <div className="p-6 md:p-8 rounded-xl border border-border bg-card shadow-lg shadow-primary/5 dark:shadow-primary/10 max-w-xs w-full" key={i}>
+                <div className="p-6 md:p-8 rounded-xl border border-border bg-card shadow-lg shadow-primary/10 max-w-xs w-full" key={i}>
                   <p className="text-sm text-foreground/90 leading-relaxed">"{testimonial.testimonial}"</p>
                   <div className="flex flex-col mt-4">
-                    <div className="font-medium text-sm tracking-tight leading-5 text-teal-500 dark:text-teal-400">{testimonial.author || testimonial.by}</div>
+                    <div className="font-medium text-sm tracking-tight leading-5 text-teal-400">{testimonial.author || testimonial.by}</div>
                     <div className="text-xs text-muted-foreground mt-1">
                       {testimonial.location && <span className="block">{testimonial.location}</span>}
                       {testimonial.rentedDate && <span>{testimonial.rentedDate}</span>}

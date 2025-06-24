@@ -230,7 +230,7 @@ export default function CarsPage() {
                 {fbTestResult.success && fbTestResult.data && (
                   <details className="mt-2">
                     <summary className="cursor-pointer text-sm">Show sample data</summary>
-                    <pre className="mt-2 text-xs overflow-auto p-2 bg-white/50 rounded">
+                    <pre className="mt-2 text-xs overflow-auto p-2 bg-card/50 rounded">
                       {JSON.stringify(fbTestResult.data[0], null, 2)}
                     </pre>
                   </details>

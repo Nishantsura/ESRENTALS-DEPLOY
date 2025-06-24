@@ -2,10 +2,10 @@ import React from 'react';
 
 export function FeaturesBenefits() {
   return (
-    <section className="bg-gray-50 py-16 md:py-32 dark:bg-transparent" data-component-name="FeaturesBenefits">
-      <div className="mx-auto w-full max-w-5xl space-y-8 px-6" data-component-name="FeaturesBenefits">
+    <section className="bg-transparent py-16 md:py-32" data-component-name="FeaturesBenefits">
+      <div className="container mx-auto px-4">
+        <h2 className="font-heading text-heading-2 text-white">Experience the <span className="text-teal-500">Elite Selection</span></h2>
         <div className="mx-auto max-w-3xl text-center" style={{ filter: "blur(0px)", opacity: 1, transform: "none" }}>
-          <h2 className="font-heading text-heading-2 text-zinc-800 dark:text-white">Experience the <span className="text-teal-500">Elite Selection</span></h2>
           <p className="mt-4 text-foreground max-w-2xl mx-auto">Premium service for discerning clients who expect nothing but the best.</p>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3" style={{ filter: "blur(0px)", opacity: 1, transform: "none" }}>

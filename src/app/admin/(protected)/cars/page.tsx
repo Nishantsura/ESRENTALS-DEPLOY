@@ -6,10 +6,13 @@ import { Car } from '@/types/car';
 import { carAPI } from '@/services/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus, Edit, Trash2, Eye } from 'lucide-react';
+import { Plus, Edit, Trash2 } from 'lucide-react';
 import { CarDialog } from '@/components/admin/car-dialog';
 import { Brand } from '@/types/brand';
 import { brandService } from '@/services/brandService';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { StatusModal } from '@/components/admin/status-modal';
+import { carService } from '@/services/carService';
 
 export default function AdminCars() {
   const [cars, setCars] = useState<Car[]>([]);

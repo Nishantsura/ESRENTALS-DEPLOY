@@ -78,28 +78,28 @@ export default function HeroSection() {
           loop 
           muted 
           playsInline
-          className="absolute top-0 left-0 w-[100vw] h-full object-cover object-center dark:brightness-[0.85] dark:contrast-[1.1] transition-all duration-700 ease-in-out">
+          className="absolute top-0 left-0 w-[100vw] h-full object-cover object-center brightness-[0.85] contrast-[1.1] transition-all duration-700 ease-in-out">
           <source src="/Videos/4632167-uhd_3840_2160_25fps.mp4" type="video/mp4" />
           {/* Fallback for older browsers */}
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-black/30 dark:bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
       
       <div className="relative z-10 w-full max-w-5xl px-4 md:px-8 flex flex-col items-center">
         {/* Text Section - Now at the top */}
         <div className="mb-8 md:mb-12 text-center animate-fade-up w-full" style={{ animationDelay: '100ms', animationDuration: '500ms' }}>
-          <h1 className="text-4xl md:text-6xl font-bold font-playfair text-white drop-shadow-lg tracking-wide dark:heading-glow">
-            Parked in Dubai. Just for You
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Experience Luxury on Wheels
           </h1>
-          <p className="text-lg font-semibold font-clash mt-3 text-white/90 drop-shadow-md">
-            Dubai's Gateway to Supercar Thrills
+          <p className="text-xl text-gray-200 mb-8 max-w-2xl">
+            Discover Dubai&apos;s finest collection of premium vehicles. From sleek sports cars to elegant SUVs, we&apos;ve got your perfect ride.
           </p>
         </div>
         
         {/* Search Box - Now below the text */}
         <div 
-          className="bg-black/30 backdrop-blur-sm shadow-lg rounded-xl p-4 md:p-6 animate-fade-up border border-white/10 dark:border-white/5 w-full max-w-[800px] overflow-hidden"
+          className="bg-black/30 backdrop-blur-sm shadow-lg rounded-xl p-4 md:p-6 animate-fade-up border border-white/5 w-full max-w-[800px] overflow-hidden"
           style={{ animationDelay: '300ms', animationDuration: '500ms' }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
@@ -114,7 +114,7 @@ export default function HeroSection() {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="City, airport, address or hotel"
-                className="mt-2 py-3 px-4 w-full rounded-md bg-black/30 border border-white/20 text-white placeholder-white/80 shadow-sm tracking-wide font-medium text-base focus:border-indigo-500 dark:focus:border-primary focus:ring-indigo-500 dark:focus:ring-primary focus:ring-opacity-50 transition-all backdrop-blur-sm"
+                className="mt-2 py-3 px-4 w-full rounded-md bg-black/30 border border-white/20 text-white placeholder-white/80 shadow-sm tracking-wide font-medium text-base focus:border-primary focus:ring-primary focus:ring-opacity-50 transition-all backdrop-blur-sm"
               />
             </div>
             
@@ -129,7 +129,7 @@ export default function HeroSection() {
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
                 placeholder="Select pickup date"
-                className="mt-2 py-3 px-4 w-full rounded-md bg-black/30 border border-white/20 text-white placeholder-white/80 shadow-sm tracking-wide font-medium text-base focus:border-indigo-500 dark:focus:border-primary focus:ring-indigo-500 dark:focus:ring-primary focus:ring-opacity-50 transition-all backdrop-blur-sm [&::-webkit-calendar-picker-indicator]:invert"
+                className="mt-2 py-3 px-4 w-full rounded-md bg-black/30 border border-white/20 text-white placeholder-white/80 shadow-sm tracking-wide font-medium text-base focus:border-primary focus:ring-primary focus:ring-opacity-50 transition-all backdrop-blur-sm [&::-webkit-calendar-picker-indicator]:invert"
               />
               
               {/* Duration tags */}
@@ -139,7 +139,7 @@ export default function HeroSection() {
                   onClick={() => setDuration('daily')}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     duration === 'daily' 
-                      ? 'bg-indigo-600 dark:bg-primary text-white dark:accent-glow' 
+                      ? 'bg-primary text-white accent-glow' 
                       : 'bg-black/20 text-white/80 hover:bg-black/30 border border-white/10'
                   }`}
                 >
@@ -150,7 +150,7 @@ export default function HeroSection() {
                   onClick={() => setDuration('3days')}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     duration === '3days' 
-                      ? 'bg-indigo-600 dark:bg-primary text-white dark:accent-glow' 
+                      ? 'bg-primary text-white accent-glow' 
                       : 'bg-black/20 text-white/80 hover:bg-black/30 border border-white/10'
                   }`}
                 >
@@ -161,7 +161,7 @@ export default function HeroSection() {
                   onClick={() => setDuration('weekly')}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     duration === 'weekly' 
-                      ? 'bg-indigo-600 dark:bg-primary text-white dark:accent-glow' 
+                      ? 'bg-primary text-white accent-glow' 
                       : 'bg-black/20 text-white/80 hover:bg-black/30 border border-white/10'
                   }`}
                 >
@@ -180,7 +180,7 @@ export default function HeroSection() {
                   id="carType"
                   value={carType}
                   onChange={(e) => setCarType(e.target.value)}
-                  className="py-3 px-4 w-full rounded-md bg-black/30 border border-white/20 text-white shadow-sm tracking-wide font-medium text-base focus:border-indigo-500 dark:focus:border-primary focus:ring-indigo-500 dark:focus:ring-primary focus:ring-opacity-50 transition-all backdrop-blur-sm appearance-none pr-10"
+                  className="py-3 px-4 w-full rounded-md bg-black/30 border border-white/20 text-white shadow-sm tracking-wide font-medium text-base focus:border-primary focus:ring-primary focus:ring-opacity-50 transition-all backdrop-blur-sm appearance-none pr-10"
                 >
 
                 <option value="">Select car type</option>
@@ -223,7 +223,7 @@ export default function HeroSection() {
                 const message = `Hi, I'm interested in renting a car from ES Rentals.%0A%0ADetails:%0A- Pickup Location: ${location || 'Dubai'}%0A- Pickup Date: ${startDate ? new Date(startDate).toLocaleDateString('en-US', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}) : 'N/A'}%0A- Return Date: ${dropoffDateObj.toLocaleDateString('en-US', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})}%0A- Duration: ${duration === 'daily' ? 'Daily' : duration === '3days' ? '+3 Days' : duration === 'weekly' ? 'Weekly' : duration}%0A- Car Type: ${carType || 'N/A'}%0A%0ACould you please provide more information about available vehicles?`;
                 window.open(`https://wa.me/971553553626?text=${message}`, '_blank');
               }}
-              className="bg-indigo-600 dark:bg-primary hover:bg-indigo-700 dark:hover:bg-primary/90 transition-colors px-7 py-3 rounded-full flex items-center justify-center shadow-md w-auto mx-auto min-w-[160px]"
+              className="bg-primary hover:bg-primary/90 transition-colors px-7 py-3 rounded-full flex items-center justify-center shadow-md w-auto mx-auto min-w-[160px]"
               aria-label="Contact Us"
             >
               <Search className="h-5 w-5 text-black mr-2" />

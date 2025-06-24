@@ -165,7 +165,7 @@ export default function CarDetails({ id }: { id: string }) {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-900 dark:bg-black text-white mb-12" data-component-name="CarDetails">
+    <div className="min-h-screen bg-black text-white mb-12" data-component-name="CarDetails">
       {car ? (
         <div className="pb-2 sticky top-0 z-20">
           <CarHeader

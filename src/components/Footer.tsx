@@ -22,8 +22,8 @@ const Footer = () => {
   const [showPrivacy, setShowPrivacy] = useState(false);
 
   return (
-    <footer className="border-t border-border bg-background/80 dark:bg-black/20 backdrop-blur-sm mt-16 dark:border-white/10">
-      <div className="max-w-7xl mx-auto px-4 py-12 dark:text-white/90">
+    <footer className="border-t border-border bg-background/80 backdrop-blur-sm mt-16 border-white/10">
+      <div className="max-w-7xl mx-auto px-4 py-12 text-white/90">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {/* Company Info */}
@@ -101,10 +101,10 @@ const Footer = () => {
         </div>
 
         {/* Credits and Copyright */}
-        <div className="pt-8 border-t border-border dark:border-white/10">
+        <div className="pt-8 border-t border-border">
           {/* Made by line - moved before copyright */}
-          <div className="text-sm text-muted-foreground dark:text-white/60 mb-2">
-            <a href="https://nishantsura.com/" className="hover:text-foreground dark:hover:text-white transition-colors">
+          <div className="text-sm text-muted-foreground mb-2">
+            <a href="https://nishantsura.com/" className="hover:text-foreground">
             Made with 💙 by Nishant Sura</a>
           </div>
           
@@ -122,7 +122,7 @@ const Footer = () => {
             <DialogTitle>Terms & Conditions</DialogTitle>
           </DialogHeader>
           <DialogDescription>
-            <div className="prose prose-sm max-w-none dark:prose-invert">
+            <div className="prose prose-sm max-w-none">
               <p className="mb-4">Last updated: {currentYear}-06-15</p>
               
               <h3 className="text-lg font-semibold my-3">1. Acceptance of Terms</h3>
@@ -151,7 +151,7 @@ const Footer = () => {
             <DialogTitle>Privacy Policy</DialogTitle>
           </DialogHeader>
           <DialogDescription>
-            <div className="prose prose-sm max-w-none dark:prose-invert">
+            <div className="prose prose-sm max-w-none">
               <p className="mb-4">Last updated: {currentYear}-06-15</p>
               
               <h3 className="text-lg font-semibold my-3">1. Information We Collect</h3>

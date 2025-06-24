@@ -71,10 +71,9 @@ export function CarImageGallery({
           {images.map((_, index) => (
             <button
               key={index}
-              className={cn(
-                "w-2.5 h-2.5 rounded-full transition-all",
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentImageIndex ? "bg-teal-400 scale-110" : "bg-white/60 hover:bg-white/80"
-              )}
+              }`}
               onClick={(e) => {
                 e.stopPropagation();
                 setCurrentImageIndex(index);
@@ -135,10 +134,9 @@ export function CarImageGallery({
                 {images.map((_, index) => (
                   <button
                     key={index}
-                    className={cn(
-                      "w-2.5 h-2.5 rounded-full transition-all",
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
                       index === currentImageIndex ? "bg-teal-400 scale-110" : "bg-white/60 hover:bg-white/80"
-                    )}
+                    }`}
                     onClick={() => setCurrentImageIndex(index)}
                   />
                 ))}

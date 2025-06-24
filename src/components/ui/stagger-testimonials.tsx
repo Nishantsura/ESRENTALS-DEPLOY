@@ -195,8 +195,8 @@ export const StaggerTestimonials: React.FC = () => {
       className="relative w-[100vw] overflow-hidden bg-gradient-to-b from-background via-background/95 to-background left-[50%] right-[50%] ml-[-50vw] mr-[-50vw] -translate-x-0"
       style={{ height: 650 }}>
       {/* Subtle background patterns for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_50%,rgba(36,36,36,0.06)_0%,rgba(36,36,36,0)_50%)] dark:bg-[radial-gradient(circle_at_15%_50%,rgba(255,255,255,0.03)_0%,rgba(255,255,255,0)_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_30%,rgba(36,36,36,0.08)_0%,rgba(36,36,36,0)_50%)] dark:bg-[radial-gradient(circle_at_85%_30%,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0)_45%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_50%,rgba(255,255,255,0.03)_0%,rgba(255,255,255,0)_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_30%,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0)_45%)]" />
       {testimonialsList.map((testimonial, index) => {
         const position = testimonialsList.length % 2
           ? index - (testimonialsList.length + 1) / 2

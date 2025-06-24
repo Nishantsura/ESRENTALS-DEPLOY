@@ -3,10 +3,12 @@ export interface Car {
   objectID?: string; // Algolia search result ID
   name: string;
   brand_id: string;
+  brand?: string; // Add brand property for backward compatibility
   transmission: 'Manual' | 'Automatic';
   seats: number;
   year: number;
   rating: number;
+  advancePayment?: boolean; // Add advancePayment property
   rareCar: boolean;
   featured: boolean;
   fuelType: 'Petrol' | 'Diesel' | 'Electric' | 'Hybrid';

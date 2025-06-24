@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
           ))}
         </div>
 
-        <div className="mt-10 bg-white rounded-lg p-6 text-center border border-gray-200">
+        <div className="mt-10 bg-card rounded-lg p-6 text-center border border-border">
           <h2 className="text-lg font-medium text-gray-900 mb-2">Questions About Our Privacy Policy?</h2>
           <p className="text-sm text-gray-600 mb-4">
             If you have any questions about our privacy practices or would like to exercise your rights, please contact us.
