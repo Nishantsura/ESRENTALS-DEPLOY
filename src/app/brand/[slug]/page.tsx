@@ -72,7 +72,7 @@ export default function BrandPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <PageHeader title="Brand" />
         <div className="container mx-auto px-4 py-8">
           <SearchResultsSkeleton />
@@ -83,7 +83,7 @@ export default function BrandPage() {
 
   if (!brand) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <PageHeader title="Brand Not Found" />
         <div className="container mx-auto px-4 py-8">
           <div className="text-center py-8">
@@ -95,16 +95,17 @@ export default function BrandPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <PageHeader title={brand.name} />
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {cars.map((car) => (
-            <TiltedCarCard
-              key={car.id}
-              car={car}
-              onClick={() => localStorage.setItem('previousPage', 'brand')}
-            />
+            <div key={car.id} className="glass-effect rounded-2xl">
+              <TiltedCarCard
+                car={car}
+                onClick={() => localStorage.setItem('previousPage', 'brand')}
+              />
+            </div>
           ))}
         </div>
 

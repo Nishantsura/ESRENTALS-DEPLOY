@@ -17,7 +17,7 @@ export function CarRating({ rating }: CarRatingProps) {
       <div className='w-[1px] h-14 rounded-md bg-zinc-600/50'></div>
       <div className="flex flex-row gap-4 items-center px-5">
         <div className="p-2.5 rounded-full bg-teal-500/20">
-          <Image src="/icons/note.png" alt="verified" width={32} height={32} className="brightness-125" />
+          <Banknote className="w-8 h-8 text-teal-400" />
         </div>
         <p className="text-base font-semibold text-white leading-5">
           No advance fee

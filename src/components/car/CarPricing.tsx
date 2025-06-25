@@ -46,21 +46,28 @@ export function CarPricing({ car, selectedDate, endDate }: CarPricingProps) {
     <div className="fixed bottom-0 left-0 right-0 p-4 bg-zinc-900/95 backdrop-blur-md border-t border-zinc-700/50 z-20 shadow-xl">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex flex-col">
-          <span className="text-lg font-bold text-white">
-            {car.dailyPrice ? (
+          {car.dailyPrice ? (
+            totalPrice ? (
               <>
-                <span className="text-teal-400">AED {car.dailyPrice.toLocaleString()}</span>/Day
+                <span className="text-lg font-bold text-white">
+                  <span className="text-teal-400">AED {totalPrice.total.toLocaleString()}</span> for {totalPrice.days} day{totalPrice.days > 1 ? 's' : ''}
+                </span>
+                <span className="text-xs font-medium text-zinc-400">
+                  (AED {car.dailyPrice.toLocaleString()}/day × {totalPrice.days} day{totalPrice.days > 1 ? 's' : ''})
+                </span>
               </>
-            ) : 'Price on request'}
-          </span>
-          {totalPrice ? (
-            <span className="text-sm font-medium text-zinc-300">
-              Total: <span className="text-teal-400 font-semibold">AED {totalPrice.total.toLocaleString()}</span> for {totalPrice.days} day{totalPrice.days > 1 ? 's' : ''}
-            </span>
+            ) : (
+              <>
+                <span className="text-lg font-bold text-white">
+                  <span className="text-teal-400">AED {car.dailyPrice.toLocaleString()}</span> <span className="text-zinc-300">/ day</span>
+                </span>
+                <span className="text-xs font-medium text-zinc-400">
+                  Select dates to see total price
+                </span>
+              </>
+            )
           ) : (
-            <span className="text-xs font-medium text-zinc-400">
-              {!effectivePickupDate ? 'Select pickup date to proceed' : !effectiveEndDate ? 'Select return date to proceed' : ''}
-            </span>
+            <span className="text-lg font-bold text-white">Price on request</span>
           )}
         </div>
         

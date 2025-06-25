@@ -7,9 +7,10 @@ import { Brand } from '@/types/brand'
 
 interface CarBrandLogoProps {
   brand: string
+  size?: number
 }
 
-export function CarBrandLogo({ brand }: CarBrandLogoProps) {
+export function CarBrandLogo({ brand, size = 48 }: CarBrandLogoProps) {
   const [brandData, setBrandData] = useState<Brand | null>(null)
 
   useEffect(() => {
@@ -34,12 +35,12 @@ export function CarBrandLogo({ brand }: CarBrandLogoProps) {
   }
 
   return (
-    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-card">
+    <div className="flex items-center justify-center rounded-full bg-card" style={{ width: size, height: size }}>
       <Image
         src={brandData.logo}
         alt={`${brandData.name} logo`}
-        width={48}
-        height={48}
+        width={size}
+        height={size}
         className="object-cover"
       />
     </div>

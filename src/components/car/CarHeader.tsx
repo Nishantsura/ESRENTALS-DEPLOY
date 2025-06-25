@@ -54,7 +54,12 @@ export function CarHeader({
               <ArrowLeft className="h-4 w-4" />
             </Button>
           </Link>
-          <CarBrandLogo brand={brand} />
+          <span className="flex items-center gap-3">
+            <span className="text-3xl font-bold text-white font-heading tracking-tight">{title}</span>
+            <span className="h-10 w-10 flex items-center">
+              <CarBrandLogo brand={brand} size={40} />
+            </span>
+          </span>
         </div>
         <div className="flex">
           <div className="flex items-center gap-1 bg-zinc-800/50 px-3 py-1 rounded-full">
