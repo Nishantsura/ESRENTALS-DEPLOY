@@ -23,6 +23,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'firebasestorage.googleapis.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'qkrymxbzkobvscvmcqxrt.supabase.co',
+        pathname: '/**', // Allow all paths, including temp uploads
+      },
     ],
   },
 }

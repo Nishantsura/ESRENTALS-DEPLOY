@@ -31,6 +31,8 @@ export default function BrandsPage() {
     fetchBrands();
   }, []);
 
+  // Filter out brands with problematic temp logo URLs
+  const safeBrands = brands.filter(b => !b.logo?.includes('temp-'));
 
   // Using global Header and Navbar from RootLayout
 
@@ -59,7 +61,7 @@ export default function BrandsPage() {
         <h1 className="text-3xl font-bold text-center mb-10 text-white">All Brands</h1>
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-          {brands.map((brand: Brand) => (
+          {safeBrands.map((brand: Brand) => (
             brand.slug ? (
               <Link
                 key={brand.id}

@@ -90,7 +90,7 @@ export default function HeroSection() {
         {/* Text Section - Now at the top */}
         <div className="mb-8 md:mb-12 text-center animate-fade-up w-full" style={{ animationDelay: '100ms', animationDuration: '500ms' }}>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Experience Luxury on Wheels
+            Parked in Dubai, Just for you.
           </h1>
           <p className="text-xl text-gray-200 mb-8 w-full max-w-4xl mx-auto text-center">
             Discover Dubai&apos;s finest collection of premium vehicles. From sleek sports cars to elegant SUVs, we&apos;ve got your perfect ride.

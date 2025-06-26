@@ -40,6 +40,12 @@ export async function GET(
 export async function PUT(request: Request, context: { params: Promise<{ slug: string }> }) {
   const { slug } = await context.params;
   const body = await request.json();
+
+  // Remove id from the update payload if present
+  if ('id' in body) {
+    delete body.id;
+  }
+
   try {
     const { data, error } = await supabase
       .from('brands')

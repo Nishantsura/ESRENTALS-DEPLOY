@@ -3,16 +3,14 @@
 import { useState, useEffect } from 'react';
 import { getCurrentUser } from '@/lib/supabase-auth';
 import { Car } from '@/types/car';
-import { carAPI } from '@/services/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { CarDialog } from '@/components/admin/car-dialog';
 import { Brand } from '@/types/brand';
-import { brandService } from '@/services/brandService';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { StatusModal } from '@/components/admin/status-modal';
-import { carService } from '@/services/carService';
+import AdminService from '@/services/adminService';
 
 export default function AdminCars() {
   const [cars, setCars] = useState<Car[]>([]);
@@ -34,7 +32,7 @@ export default function AdminCars() {
         throw new Error('Not authenticated');
       }
 
-      const carsData = await carAPI.getAllCars();
+      const carsData = await AdminService.getAllCars();
       setCars(carsData);
       setError(null);
     } catch (err) {
@@ -46,8 +44,12 @@ export default function AdminCars() {
   };
 
   const fetchBrands = async () => {
-    const brandsData = await brandService.getAllBrands();
-    setBrands(brandsData);
+    try {
+      const brandsData = await AdminService.getAllBrands();
+      setBrands(brandsData);
+    } catch (err) {
+      console.error('Error fetching brands:', err);
+    }
   };
 
   const handleCreateCar = () => {
@@ -66,7 +68,7 @@ export default function AdminCars() {
     }
 
     try {
-      await carAPI.deleteCar(id);
+      await AdminService.deleteCar(id);
       await fetchCars(); // Refresh the list
     } catch (err) {
       console.error('Error deleting car:', err);
@@ -153,22 +155,30 @@ export default function AdminCars() {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Brand:</span>
-                  <span className="text-sm font-medium">{brands.find(b => b.id === car.brand_id)?.name || 'Unknown'}</span>
+                  <span className="text-sm font-medium">{car.brand || brands.find(b => b.id === car.brand_id)?.name || 'Unknown'}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Type:</span>
-                  <span className="text-sm font-medium">{car.type}</span>
+                  <span className="text-sm text-gray-600">Year:</span>
+                  <span className="text-sm font-medium">{car.year}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Price:</span>
                   <span className="text-sm font-medium">${car.dailyPrice}/day</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Status:</span>
+                  <span className="text-sm text-gray-600">Featured:</span>
+                  <span className={`text-sm font-medium ${
+                    car.featured ? 'text-green-600' : 'text-gray-600'
+                  }`}>
+                    {car.featured ? 'Yes' : 'No'}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-600">Available:</span>
                   <span className={`text-sm font-medium ${
                     car.available ? 'text-green-600' : 'text-red-600'
                   }`}>
-                    {car.available ? 'Available' : 'Unavailable'}
+                    {car.available ? 'Yes' : 'No'}
                   </span>
                 </div>
               </div>
@@ -196,9 +206,9 @@ export default function AdminCars() {
         onSave={async (car: Partial<Car>) => {
           try {
             if (editingCar) {
-              await carAPI.updateCar(editingCar.id, car);
+              await AdminService.updateCar(editingCar.id, car);
             } else {
-              await carAPI.createCar(car);
+              await AdminService.createCar(car);
             }
             handleCarSaved();
           } catch (err) {

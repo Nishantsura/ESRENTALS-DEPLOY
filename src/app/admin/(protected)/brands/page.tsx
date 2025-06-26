@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import { getCurrentUser } from '@/lib/supabase-auth';
 import { Brand } from '@/types/brand';
-import { brandAPI } from '@/services/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { BrandDialog } from '@/components/admin/brand-dialog';
+import AdminService from '@/services/adminService';
 
 export default function AdminBrands() {
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -27,7 +27,7 @@ export default function AdminBrands() {
         throw new Error('Not authenticated');
       }
 
-      const brandsData = await brandAPI.getAllBrands();
+      const brandsData = await AdminService.getAllBrands();
       setBrands(brandsData);
       setError(null);
     } catch (err) {
@@ -54,7 +54,7 @@ export default function AdminBrands() {
     }
 
     try {
-      await brandAPI.deleteBrand(id);
+      await AdminService.deleteBrand(id);
       await fetchBrands(); // Refresh the list
     } catch (err) {
       console.error('Error deleting brand:', err);
@@ -181,9 +181,9 @@ export default function AdminBrands() {
         onSave={async (brand: Partial<Brand>) => {
           try {
             if (editingBrand && editingBrand.id) {
-              await brandAPI.updateBrand(editingBrand.id, brand);
+              await AdminService.updateBrand(editingBrand.id, brand);
             } else {
-              await brandAPI.createBrand(brand);
+              await AdminService.createBrand(brand);
             }
             handleBrandSaved();
           } catch (err) {

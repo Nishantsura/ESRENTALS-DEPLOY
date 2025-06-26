@@ -105,7 +105,7 @@ const Footer = () => {
           {/* Made by line - moved before copyright */}
           <div className="text-sm text-muted-foreground mb-2">
             <a href="https://nishantsura.com/" className="hover:text-foreground">
-            Made with 💙 by Nishant Sura</a>
+            Made with 💙 by ProQuo</a>
           </div>
           
           {/* Copyright Bar - converted to single line */}

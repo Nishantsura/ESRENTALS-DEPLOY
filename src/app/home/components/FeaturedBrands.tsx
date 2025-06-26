@@ -14,8 +14,9 @@ export function FeaturedBrands({ brands }: FeaturedBrandsProps) {
   const [isPaused, setIsPaused] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   
-  // Multiply brands to ensure we have enough content for seamless scrolling
-  const displayBrands = [...brands, ...brands, ...brands, ...brands];
+  // Filter out brands with problematic temp logo URLs
+  const safeBrands = brands.filter(b => !b.logo?.includes('temp-'));
+  const displayBrands = [...safeBrands, ...safeBrands, ...safeBrands, ...safeBrands];
   return (
     <section className="mt-4 sm:mt-10 px-4 sm:px-4">
       <div className="flex items-center justify-between mb-2 -mx-4">

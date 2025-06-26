@@ -3,60 +3,42 @@
 import { useState, useEffect } from 'react';
 import { getCurrentUser } from '@/lib/supabase-auth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Car, Tag, Building2, Users } from 'lucide-react';
-
-interface DashboardStats {
-  totalCars: number;
-  totalCategories: number;
-  totalBrands: number;
-  totalUsers: number;
-}
+import { Car, Tag, Users, TrendingUp } from 'lucide-react';
+import AdminService, { AdminStats } from '@/services/adminService';
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<DashboardStats>({
+  const [stats, setStats] = useState<AdminStats>({
     totalCars: 0,
-    totalCategories: 0,
     totalBrands: 0,
-    totalUsers: 0
+    totalCategories: 0,
+    featuredCars: 0,
+    featuredBrands: 0,
+    featuredCategories: 0
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const user = await getCurrentUser();
-        if (!user) {
-          throw new Error('Not authenticated');
-        }
-
-        // Fetch stats from API
-        const [carsRes, categoriesRes, brandsRes] = await Promise.all([
-          fetch('/api/cars'),
-          fetch('/api/categories'),
-          fetch('/api/brands')
-        ]);
-
-        const cars = await carsRes.json();
-        const categories = await categoriesRes.json();
-        const brands = await brandsRes.json();
-
-        setStats({
-          totalCars: cars.length || 0,
-          totalCategories: categories.length || 0,
-          totalBrands: brands.length || 0,
-          totalUsers: 0 // TODO: Implement user count when user management is added
-        });
-      } catch (err) {
-        console.error('Error fetching dashboard stats:', err);
-        setError(err instanceof Error ? err.message : 'Failed to load dashboard');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchStats();
   }, []);
+
+  const fetchStats = async () => {
+    try {
+      const user = await getCurrentUser();
+      if (!user) {
+        throw new Error('Not authenticated');
+      }
+
+      const statsData = await AdminService.getAdminStats();
+      setStats(statsData);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching stats:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load dashboard stats');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -122,7 +104,7 @@ export default function AdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Brands</CardTitle>
-            <Building2 className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalBrands}</div>
@@ -134,43 +116,83 @@ export default function AdminDashboard() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Featured Items</CardTitle>
+            <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalUsers}</div>
+            <div className="text-2xl font-bold">
+              {stats.featuredCars + stats.featuredBrands + stats.featuredCategories}
+            </div>
             <p className="text-xs text-muted-foreground">
-              Registered users
+              Featured content
             </p>
           </CardContent>
         </Card>
       </div>
 
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Featured Cars</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-blue-600">{stats.featuredCars}</div>
+            <p className="text-sm text-gray-600">Cars marked as featured</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Featured Brands</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-green-600">{stats.featuredBrands}</div>
+            <p className="text-sm text-gray-600">Brands marked as featured</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Featured Categories</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-purple-600">{stats.featuredCategories}</div>
+            <p className="text-sm text-gray-600">Categories marked as featured</p>
+          </CardContent>
+        </Card>
+      </div>
+
       <div className="mt-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a
-            href="/admin/cars"
-            className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <h3 className="font-medium text-gray-900">Manage Cars</h3>
-            <p className="text-sm text-gray-600 mt-1">Add, edit, or remove vehicles</p>
-          </a>
-          <a
-            href="/admin/categories"
-            className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <h3 className="font-medium text-gray-900">Manage Categories</h3>
-            <p className="text-sm text-gray-600 mt-1">Organize car types and tags</p>
-          </a>
-          <a
-            href="/admin/brands"
-            className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <h3 className="font-medium text-gray-900">Manage Brands</h3>
-            <p className="text-sm text-gray-600 mt-1">Add car manufacturers</p>
-          </a>
-        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Quick Actions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <a 
+                href="/admin/cars" 
+                className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <h3 className="font-semibold text-gray-900">Manage Cars</h3>
+                <p className="text-sm text-gray-600">Add, edit, or remove vehicles</p>
+              </a>
+              <a 
+                href="/admin/brands" 
+                className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <h3 className="font-semibold text-gray-900">Manage Brands</h3>
+                <p className="text-sm text-gray-600">Add, edit, or remove car brands</p>
+              </a>
+              <a 
+                href="/admin/categories" 
+                className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <h3 className="font-semibold text-gray-900">Manage Categories</h3>
+                <p className="text-sm text-gray-600">Add, edit, or remove categories</p>
+              </a>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

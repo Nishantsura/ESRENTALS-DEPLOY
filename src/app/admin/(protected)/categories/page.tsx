@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import { getCurrentUser } from '@/lib/supabase-auth';
 import { Category } from '@/types/category';
-import { categoryService } from '@/services/categoryService';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { CategoryDialog } from '@/components/admin/category-dialog';
+import AdminService from '@/services/adminService';
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -27,7 +27,7 @@ export default function AdminCategories() {
         throw new Error('Not authenticated');
       }
 
-      const categoriesData = await categoryService.getAllCategories();
+      const categoriesData = await AdminService.getAllCategories();
       setCategories(categoriesData);
       setError(null);
     } catch (err) {
@@ -57,7 +57,7 @@ export default function AdminCategories() {
       if (!id) {
         throw new Error('Category ID is required');
       }
-      await categoryService.deleteCategory(id);
+      await AdminService.deleteCategory(id);
       await fetchCategories(); // Refresh the list
     } catch (err) {
       console.error('Error deleting category:', err);
@@ -145,7 +145,7 @@ export default function AdminCategories() {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Type:</span>
-                  <span className="text-sm font-medium capitalize">{category.type}</span>
+                  <span className="text-sm font-medium">{category.type}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Slug:</span>
@@ -190,9 +190,9 @@ export default function AdminCategories() {
         onSave={async (category: Partial<Category>) => {
           try {
             if (editingCategory && editingCategory.id) {
-              await categoryService.updateCategory(editingCategory.id, category);
+              await AdminService.updateCategory(editingCategory.id, category);
             } else {
-              await categoryService.createCategory(category);
+              await AdminService.createCategory(category);
             }
             handleCategorySaved();
           } catch (err) {

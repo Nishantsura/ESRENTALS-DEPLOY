@@ -96,7 +96,7 @@ export const carAPI = {
 
   getCarsByBrand: async (brand: string): Promise<Car[]> => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/cars/brand/${encodeURIComponent(brand)}`, {
+      const response = await fetch(`${API_BASE_URL}/api/cars/by-brand/${encodeURIComponent(brand)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
