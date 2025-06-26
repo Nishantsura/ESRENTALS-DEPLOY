@@ -4,7 +4,16 @@ import { useState, useEffect } from 'react';
 import { getCurrentUser } from '@/lib/supabase-auth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Car, Tag, Users, TrendingUp } from 'lucide-react';
-import AdminService, { AdminStats } from '@/services/adminService';
+import AdminService from '@/services/adminService';
+
+type AdminStats = {
+  totalCars: number;
+  totalBrands: number;
+  totalCategories: number;
+  featuredCars: number;
+  featuredBrands: number;
+  featuredCategories: number;
+};
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState<AdminStats>({
@@ -68,62 +77,62 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-[#101014] min-h-screen">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-        <p className="text-gray-600 mt-2">Welcome to the AutoLuxe admin panel</p>
+        <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+        <p className="text-gray-400 mt-2">Welcome to the AutoLuxe admin panel</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card>
+        <Card className="bg-[#18181b] border-none shadow-none">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Cars</CardTitle>
-            <Car className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-gray-200">Total Cars</CardTitle>
+            <Car className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalCars}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold text-white">{stats.totalCars}</div>
+            <p className="text-xs text-gray-500">
               Available vehicles
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[#18181b] border-none shadow-none">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Categories</CardTitle>
-            <Tag className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-gray-200">Categories</CardTitle>
+            <Tag className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalCategories}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold text-white">{stats.totalCategories}</div>
+            <p className="text-xs text-gray-500">
               Car types, fuel types, and tags
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[#18181b] border-none shadow-none">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Brands</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-gray-200">Brands</CardTitle>
+            <Users className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalBrands}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-2xl font-bold text-white">{stats.totalBrands}</div>
+            <p className="text-xs text-gray-500">
               Car manufacturers
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[#18181b] border-none shadow-none">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Featured Items</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-gray-200">Featured Items</CardTitle>
+            <TrendingUp className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-2xl font-bold text-white">
               {stats.featuredCars + stats.featuredBrands + stats.featuredCategories}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-gray-500">
               Featured content
             </p>
           </CardContent>
@@ -131,64 +140,64 @@ export default function AdminDashboard() {
       </div>
 
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
+        <Card className="bg-[#18181b] border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-lg">Featured Cars</CardTitle>
+            <CardTitle className="text-lg text-gray-200">Featured Cars</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-blue-600">{stats.featuredCars}</div>
-            <p className="text-sm text-gray-600">Cars marked as featured</p>
+            <div className="text-3xl font-bold text-blue-400">{stats.featuredCars}</div>
+            <p className="text-sm text-gray-500">Cars marked as featured</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[#18181b] border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-lg">Featured Brands</CardTitle>
+            <CardTitle className="text-lg text-gray-200">Featured Brands</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-green-600">{stats.featuredBrands}</div>
-            <p className="text-sm text-gray-600">Brands marked as featured</p>
+            <div className="text-3xl font-bold text-green-400">{stats.featuredBrands}</div>
+            <p className="text-sm text-gray-500">Brands marked as featured</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-[#18181b] border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-lg">Featured Categories</CardTitle>
+            <CardTitle className="text-lg text-gray-200">Featured Categories</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-purple-600">{stats.featuredCategories}</div>
-            <p className="text-sm text-gray-600">Categories marked as featured</p>
+            <div className="text-3xl font-bold text-purple-400">{stats.featuredCategories}</div>
+            <p className="text-sm text-gray-500">Categories marked as featured</p>
           </CardContent>
         </Card>
       </div>
 
       <div className="mt-8">
-        <Card>
+        <Card className="bg-[#18181b] border-none shadow-none">
           <CardHeader>
-            <CardTitle className="text-lg">Quick Actions</CardTitle>
+            <CardTitle className="text-lg text-gray-200">Quick Actions</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <a 
                 href="/admin/cars" 
-                className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+                className="p-4 rounded-lg bg-[#23232b] hover:bg-[#23232b]/80 transition-colors border border-[#23232b]"
               >
-                <h3 className="font-semibold text-gray-900">Manage Cars</h3>
-                <p className="text-sm text-gray-600">Add, edit, or remove vehicles</p>
+                <h3 className="font-semibold text-white">Manage Cars</h3>
+                <p className="text-sm text-gray-400">Add, edit, or remove vehicles</p>
               </a>
               <a 
                 href="/admin/brands" 
-                className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+                className="p-4 rounded-lg bg-[#23232b] hover:bg-[#23232b]/80 transition-colors border border-[#23232b]"
               >
-                <h3 className="font-semibold text-gray-900">Manage Brands</h3>
-                <p className="text-sm text-gray-600">Add, edit, or remove car brands</p>
+                <h3 className="font-semibold text-white">Manage Brands</h3>
+                <p className="text-sm text-gray-400">Add, edit, or remove car brands</p>
               </a>
               <a 
                 href="/admin/categories" 
-                className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+                className="p-4 rounded-lg bg-[#23232b] hover:bg-[#23232b]/80 transition-colors border border-[#23232b]"
               >
-                <h3 className="font-semibold text-gray-900">Manage Categories</h3>
-                <p className="text-sm text-gray-600">Add, edit, or remove categories</p>
+                <h3 className="font-semibold text-white">Manage Categories</h3>
+                <p className="text-sm text-gray-400">Add, edit, or remove categories</p>
               </a>
             </div>
           </CardContent>
