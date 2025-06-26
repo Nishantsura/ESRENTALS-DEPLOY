@@ -29,7 +29,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Autoluxe - Luxury Car Rental in Dubai",
+  title: "ES Rentals",
   description: "Find the best cars for rent in Dubai. Explore our wide range of luxury vehicles and book your dream car today.",
 };
 
