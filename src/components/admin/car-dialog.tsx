@@ -162,7 +162,7 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
                 <Label htmlFor="name">Name *</Label>
                 <Input
                   id="name"
-                  value={formData.name}
+                  value={formData.name ?? ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
                 />
@@ -191,8 +191,8 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
                 <Input
                   id="year"
                   type="number"
-                  value={formData.year}
-                  onChange={(e) => setFormData({ ...formData, year: parseInt(e.target.value) })}
+                  value={formData.year !== undefined ? formData.year.toString() : ''}
+                  onChange={(e) => setFormData({ ...formData, year: e.target.value === '' ? undefined : parseInt(e.target.value) })}
                   required
                 />
               </div>
@@ -201,8 +201,8 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
                 <Input
                   id="seats"
                   type="number"
-                  value={formData.seats}
-                  onChange={(e) => setFormData({ ...formData, seats: parseInt(e.target.value) })}
+                  value={formData.seats !== undefined ? formData.seats.toString() : ''}
+                  onChange={(e) => setFormData({ ...formData, seats: e.target.value === '' ? undefined : parseInt(e.target.value) })}
                 />
               </div>
             </div>
@@ -249,7 +249,7 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
                 <Label htmlFor="engineCapacity">Engine Capacity (cc)</Label>
                 <Input
                   id="engineCapacity"
-                  value={formData.engineCapacity}
+                  value={formData.engineCapacity ?? ''}
                   onChange={(e) => setFormData({ ...formData, engineCapacity: e.target.value })}
                 />
               </div>
@@ -257,7 +257,7 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
                 <Label htmlFor="power">Power (HP)</Label>
                 <Input
                   id="power"
-                  value={formData.power}
+                  value={formData.power ?? ''}
                   onChange={(e) => setFormData({ ...formData, power: e.target.value })}
                 />
               </div>
@@ -273,8 +273,8 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
                 <Input
                   id="dailyPrice"
                   type="number"
-                  value={formData.dailyPrice || ''}
-                  onChange={(e) => setFormData({ ...formData, dailyPrice: parseFloat(e.target.value) })}
+                  value={formData.dailyPrice !== undefined ? formData.dailyPrice.toString() : ''}
+                  onChange={(e) => setFormData({ ...formData, dailyPrice: e.target.value === '' ? undefined : parseFloat(e.target.value) })}
                 />
               </div>
               <div className="space-y-2">
@@ -328,32 +328,29 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
               </div>
             </div>
             
-            {/* Categories */}
+            {/* Features/Tags */}
             <div className="space-y-2">
-              <Label>Categories</Label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 border rounded-lg p-4">
-                {tagCategories.map((category) => (
-                  <div key={category.id} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`category-${category.id}`}
-                      checked={formData.tags?.includes(category.id || '') || false}
-                      onCheckedChange={(checked) => {
-                        const categoryId = category.id || '';
-                        const currentTags = formData.tags || [];
-                        const newTags = checked
-                          ? [...currentTags, categoryId]
-                          : currentTags.filter(id => id !== categoryId);
-                        setFormData({ ...formData, tags: newTags });
-                      }}
-                      disabled={loading}
-                    />
-                    <Label
-                      htmlFor={`category-${category.id}`}
-                      className="text-sm cursor-pointer"
-                    >
-                      {category.name}
-                    </Label>
-                  </div>
+              <Label>Features & Status</Label>
+              <div className="grid grid-cols-2 gap-2">
+                {tagCategories.map((tag) => (
+                  <Checkbox
+                    key={tag.id}
+                    checked={formData.tags?.includes(tag.id || '') || false}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setFormData({
+                          ...formData,
+                          tags: [...(formData.tags || []), tag.id || '']
+                        });
+                      } else {
+                        setFormData({
+                          ...formData,
+                          tags: (formData.tags || []).filter((t) => t !== tag.id)
+                        });
+                      }
+                    }}
+                    id={`tag-${tag.id}`}
+                  />
                 ))}
               </div>
             </div>
@@ -423,7 +420,7 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
               <Label htmlFor="description">Car Description</Label>
               <Textarea
                 id="description"
-                value={formData.description}
+                value={formData.description ?? ''}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 className="h-32"
               />
@@ -496,31 +493,17 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
             </div>
           </div>
 
-          {/* Mileage */}
+          {/* Car Type (single dropdown, mapped to 'category') */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Mileage</h3>
+            <h3 className="text-lg font-semibold">Car Type</h3>
             <div className="space-y-2">
-              <Label htmlFor="mileage">Mileage</Label>
-              <Input
-                id="mileage"
-                type="number"
-                value={formData.mileage || ''}
-                onChange={(e) => setFormData({ ...formData, mileage: parseInt(e.target.value) })}
-              />
-            </div>
-          </div>
-
-          {/* Category */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Category</h3>
-            <div className="space-y-2">
-              <Label htmlFor="category">Category</Label>
+              <Label htmlFor="category">Car Type</Label>
               <Select
-                value={formData.category || ''}
+                value={formData.category ?? ''}
                 onValueChange={(value) => setFormData({ ...formData, category: value })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select category" />
+                  <SelectValue placeholder="Select car type" />
                 </SelectTrigger>
                 <SelectContent>
                   {carTypeCategories.map((category) => (
@@ -530,20 +513,6 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
                   ))}
                 </SelectContent>
               </Select>
-            </div>
-          </div>
-
-          {/* Specs */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Specs</h3>
-            <div className="space-y-2">
-              <Label htmlFor="specs">Specs (JSON)</Label>
-              <Textarea
-                id="specs"
-                value={typeof formData.specs === 'string' ? formData.specs : ''}
-                onChange={(e) => setFormData({ ...formData, specs: e.target.value })}
-                className="h-32"
-              />
             </div>
           </div>
 

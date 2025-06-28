@@ -3,7 +3,10 @@ export interface Car {
   objectID?: string; // Algolia search result ID
   name: string;
   brand_id: string;
-  brand?: string; // Add brand property for backward compatibility
+  /**
+   * @deprecated Use brand_id for all logic and display. This is only for backward compatibility.
+   */
+  brand?: string;
   transmission: 'Manual' | 'Automatic';
   seats: number;
   year: number;

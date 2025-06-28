@@ -64,6 +64,9 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
     if ('brand' in updateData) {
       delete updateData.brand;
     }
+    if ('brand_name' in updateData) {
+      delete updateData.brand_name;
+    }
     console.log(`API Route: Updating car with ID: ${id} (Supabase)`);
 
     const { data, error } = await supabase

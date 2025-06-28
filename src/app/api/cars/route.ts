@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     console.log('API Route: Handling GET request for cars (Supabase)');
     const { searchParams } = new URL(request.url);
     const featured = searchParams.get('featured');
-    const brand = searchParams.get('brand');
+    const brandId = searchParams.get('brand_id');
     const category = searchParams.get('category');
     const type = searchParams.get('type');
     const tag = searchParams.get('tag');
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
 
     let query = supabase.from('cars').select('*');
     if (featured === 'true') query = query.eq('featured', true);
-    if (brand && brand !== 'all') query = query.eq('brand_name', brand);
+    if (brandId && brandId !== 'all') query = query.eq('brand_id', brandId);
     if (category && category !== 'all') query = query.contains('tags', [category]);
     if (type) query = query.eq('type', type);
     if (tag) query = query.contains('tags', [tag]);
@@ -39,7 +39,7 @@ export async function GET(request: Request) {
     const carsList: Car[] = (data || []).map((car: any) => ({
       id: car.id,
       name: car.name,
-      brand_id: car.brand_id || car.brand_name || '',
+      brand_id: car.brand_id || '',
       transmission: car.transmission || 'Automatic',
       seats: car.seats || 4,
       year: car.year,
@@ -89,7 +89,7 @@ export async function POST(request: Request) {
     // Map frontend fields to Supabase columns
     const newCar = {
       name: body.name,
-      brand_name: body.brand_id || body.brand_name || '',
+      brand_id: body.brand_id || '',
       year: body.year,
       category: body.category || '',
       type: body.type,

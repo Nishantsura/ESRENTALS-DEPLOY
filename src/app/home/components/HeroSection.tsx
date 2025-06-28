@@ -79,7 +79,7 @@ export default function HeroSection() {
           muted 
           playsInline
           className="absolute top-0 left-0 w-[100vw] h-full object-cover object-center brightness-[0.85] contrast-[1.1] transition-all duration-700 ease-in-out">
-          <source src="/Videos/4632167-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+          <source src="/Videos/8443861-uhd_3840_2160_30fps.mp4" type="video/mp4" />
           {/* Fallback for older browsers */}
           Your browser does not support the video tag.
         </video>

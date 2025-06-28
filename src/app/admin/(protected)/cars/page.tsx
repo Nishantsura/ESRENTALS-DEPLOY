@@ -155,7 +155,7 @@ export default function AdminCars() {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Brand:</span>
-                  <span className="text-sm font-medium">{car.brand || brands.find(b => b.id === car.brand_id)?.name || 'Unknown'}</span>
+                  <span className="text-sm font-medium">{brands.find(b => b.id === car.brand_id)?.name || 'Unknown'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Year:</span>
