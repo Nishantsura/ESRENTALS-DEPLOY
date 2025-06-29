@@ -16,19 +16,26 @@ if (!supabaseUrl || !supabaseServiceKey) {
 // Create Supabase client with service role key for admin operations
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-async function createAdminUser() {
-  const email = 'admin@autoluxe.com';
-  const password = 'admin123456'; // WARNING: Use a strong, unique password in production
+async function createAdminUser(email?: string, password?: string) {
+  // Use provided email/password or defaults
+  const adminEmail = email || 'admin@autoluxe.com';
+  const adminPassword = password || 'admin123456'; // WARNING: Use a strong, unique password in production
+
+  // Validate email domain
+  if (!adminEmail.endsWith('@autoluxe.com')) {
+    console.error('❌ Error: Only @autoluxe.com email addresses are allowed for admin users');
+    process.exit(1);
+  }
 
   console.log('🔧 Ensuring admin user exists and has admin privileges...');
-  console.log(`   Email: ${email}`);
+  console.log(`   Email: ${adminEmail}`);
   console.log('');
 
   try {
     // Step 1: Attempt to create the user in Supabase Auth.
     const { data: { user }, error: createError } = await supabase.auth.admin.createUser({
-      email,
-      password,
+      email: adminEmail,
+      password: adminPassword,
       email_confirm: true,
     });
 
@@ -40,12 +47,12 @@ async function createAdminUser() {
       console.log('   - Auth user already exists. Fetching user and resetting password...');
       const { data: { users }, error: listError } = await supabase.auth.admin.listUsers();
       if (listError) throw listError;
-      const foundUser = users.find(u => u.email === email);
+      const foundUser = users.find(u => u.email === adminEmail);
       if (!foundUser) throw new Error('Could not find user in auth list');
       
       const { error: updateError } = await supabase.auth.admin.updateUserById(
         foundUser.id,
-        { password: password }
+        { password: adminPassword }
       );
 
       if (updateError) {
@@ -95,14 +102,32 @@ async function createAdminUser() {
 
     console.log('\n🎉 Admin user setup complete!');
     console.log('   You can now log in to the admin panel with:');
-    console.log(`   Email: ${email}`);
-    console.log(`   Password: ${password} (if user was newly created)`);
+    console.log(`   Email: ${adminEmail}`);
+    console.log(`   Password: ${adminPassword} (if user was newly created)`);
     console.log('');
-    console.log(`🔗 Admin Panel URL: http://localhost:3005/admin/login`);
+    console.log(`🔗 Admin Panel URL: http://localhost:3000/admin/login`);
 
   } catch (error) {
     console.error('❌ An unexpected error occurred:', (error as Error).message);
   }
 }
 
-createAdminUser().catch(e => console.error(e.message)); 
+// Get command line arguments
+const args = process.argv.slice(2);
+const email = args[0];
+const password = args[1];
+
+if (args.length > 0 && !email?.includes('@')) {
+  console.log('📖 Usage:');
+  console.log('   npm run create-admin                    # Create default admin (admin@autoluxe.com)');
+  console.log('   npm run create-admin <email> <password> # Create custom admin user');
+  console.log('');
+  console.log('📝 Examples:');
+  console.log('   npm run create-admin');
+  console.log('   npm run create-admin john@autoluxe.com mySecurePassword123');
+  console.log('');
+  console.log('⚠️  Note: Only @autoluxe.com email addresses are allowed');
+  process.exit(1);
+}
+
+createAdminUser(email, password).catch(e => console.error(e.message)); 
