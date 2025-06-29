@@ -21,7 +21,7 @@ export default function AdminLogin() {
     try {
       // Validate admin email
       if (!isValidAdminEmail(email)) {
-        setError('Only @autoluxe.com email addresses allowed');
+        setError('Only @esrentals.com email addresses allowed');
         return;
       }
       
@@ -64,7 +64,7 @@ export default function AdminLogin() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@autoluxe.com"
+              placeholder="admin@esrentals.com"
               required
               disabled={loading}
               className="rounded-lg"

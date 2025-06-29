@@ -1,12 +1,12 @@
 # Admin Email Setup Guide
 
-This guide explains how to add new admin email addresses to the AutoLuxe admin panel.
+This guide explains how to add new admin email addresses to the ESRentals admin panel.
 
 ## Current System Overview
 
-- **Email Domain Restriction**: Only `@autoluxe.com` email addresses are allowed
+- **Email Domain Restriction**: Only `@esrentals.com` email addresses are allowed
 - **Authentication**: Uses Supabase Auth with admin privileges stored in the `users` table
-- **Validation**: Email must end with `@autoluxe.com` to be considered valid
+- **Validation**: Email must end with `@esrentals.com` to be considered valid
 
 ## Method 1: Using the Script (Recommended)
 
@@ -25,7 +25,7 @@ This guide explains how to add new admin email addresses to the AutoLuxe admin p
 ```bash
 npm run create:admin
 ```
-This creates the default admin user: `admin@autoluxe.com`
+This creates the default admin user: `admin@esrentals.com`
 
 #### Option B: Create Custom Admin User
 ```bash
@@ -35,15 +35,15 @@ npm run create:admin <email> <password>
 **Examples:**
 ```bash
 # Create admin with custom email
-npm run create:admin john@autoluxe.com mySecurePassword123
+npm run create:admin john@esrentals.com mySecurePassword123
 
 # Create another admin
-npm run create:admin sarah@autoluxe.com anotherSecurePass456
+npm run create:admin sarah@esrentals.com anotherSecurePass456
 ```
 
 ### What the Script Does
 
-1. **Validates Email Domain**: Ensures the email ends with `@autoluxe.com`
+1. **Validates Email Domain**: Ensures the email ends with `@esrentals.com`
 2. **Creates Auth User**: Adds the user to Supabase Auth system
 3. **Sets Admin Privileges**: Grants admin access in the `users` table
 4. **Handles Existing Users**: If the user already exists, it updates their password and ensures admin privileges
@@ -61,7 +61,7 @@ If you prefer to set up admin users manually, follow these steps:
 ### Step 2: Add Admin Entry to Users Table
 ```sql
 INSERT INTO users (id, email, is_admin) 
-VALUES ('user-uuid-from-auth', 'newadmin@autoluxe.com', true);
+VALUES ('user-uuid-from-auth', 'newadmin@esrentals.com', true);
 ```
 
 ## Method 3: Using Supabase Dashboard
@@ -69,7 +69,7 @@ VALUES ('user-uuid-from-auth', 'newadmin@autoluxe.com', true);
 1. Go to your Supabase project dashboard
 2. Navigate to **Authentication** → **Users**
 3. Click **Add User**
-4. Enter the email (must be `@autoluxe.com`)
+4. Enter the email (must be `@esrentals.com`)
 5. Set a password
 6. Go to **Table Editor** → **users**
 7. Add a row with:
@@ -89,8 +89,8 @@ After adding an admin email, you can verify it works by:
 
 ### Common Issues
 
-1. **"Only @autoluxe.com email addresses allowed"**
-   - Solution: Use an email that ends with `@autoluxe.com`
+1. **"Only @esrentals.com email addresses allowed"**
+   - Solution: Use an email that ends with `@esrentals.com`
 
 2. **"Authentication failed"**
    - Check if the user exists in Supabase Auth

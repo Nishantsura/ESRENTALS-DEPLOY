@@ -18,12 +18,12 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 async function createAdminUser(email?: string, password?: string) {
   // Use provided email/password or defaults
-  const adminEmail = email || 'admin@autoluxe.com';
+  const adminEmail = email || 'admin@esrentals.com';
   const adminPassword = password || 'admin123456'; // WARNING: Use a strong, unique password in production
 
   // Validate email domain
-  if (!adminEmail.endsWith('@autoluxe.com')) {
-    console.error('❌ Error: Only @autoluxe.com email addresses are allowed for admin users');
+  if (!adminEmail.endsWith('@esrentals.com')) {
+    console.error('❌ Error: Only @esrentals.com email addresses are allowed for admin users');
     process.exit(1);
   }
 
@@ -119,14 +119,14 @@ const password = args[1];
 
 if (args.length > 0 && !email?.includes('@')) {
   console.log('📖 Usage:');
-  console.log('   npm run create-admin                    # Create default admin (admin@autoluxe.com)');
+  console.log('   npm run create-admin                    # Create default admin (admin@esrentals.com)');
   console.log('   npm run create-admin <email> <password> # Create custom admin user');
   console.log('');
   console.log('📝 Examples:');
   console.log('   npm run create-admin');
-  console.log('   npm run create-admin john@autoluxe.com mySecurePassword123');
+  console.log('   npm run create-admin john@esrentals.com mySecurePassword123');
   console.log('');
-  console.log('⚠️  Note: Only @autoluxe.com email addresses are allowed');
+  console.log('⚠️  Note: Only @esrentals.com email addresses are allowed');
   process.exit(1);
 }
 

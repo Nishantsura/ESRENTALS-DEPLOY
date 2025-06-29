@@ -54,7 +54,7 @@ export const onAuthStateChanged = (callback: (user: any) => void) => {
 };
 
 export const isValidAdminEmail = (email: string): boolean => {
-  return email.endsWith('@autoluxe.com');
+  return email.endsWith('@esrentals.com');
 };
 
 // Check if user is admin
