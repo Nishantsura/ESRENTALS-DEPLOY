@@ -298,61 +298,48 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
             </div>
           </div>
 
-          {/* Features and Status */}
+          {/* Features & Status */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Features and Status</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-center space-x-2">
+            <h3 className="text-lg font-semibold">Features & Status</h3>
+            <div className="flex items-center gap-4 mb-2">
+              <div className="flex items-center gap-2">
                 <Switch
-                  id="available"
-                  checked={formData.available}
+                  checked={formData.available ?? true}
                   onCheckedChange={(checked) => setFormData({ ...formData, available: checked })}
+                  id="available"
                 />
                 <Label htmlFor="available">Available for Rent</Label>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center gap-2">
                 <Switch
-                  id="rareCar"
-                  checked={formData.rareCar}
-                  onCheckedChange={(checked) => setFormData({ ...formData, rareCar: checked })}
-                />
-                <Label htmlFor="rareCar">Rare Car</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Switch
-                  id="featured"
-                  checked={formData.featured}
+                  checked={formData.featured ?? false}
                   onCheckedChange={(checked) => setFormData({ ...formData, featured: checked })}
+                  id="featured"
                 />
                 <Label htmlFor="featured">Featured</Label>
               </div>
             </div>
-            
-            {/* Features/Tags */}
-            <div className="space-y-2">
-              <Label>Features & Status</Label>
-              <div className="grid grid-cols-2 gap-2">
-                {tagCategories.map((tag) => (
-                  <Checkbox
-                    key={tag.id}
-                    checked={formData.tags?.includes(tag.id || '') || false}
-                    onCheckedChange={(checked) => {
-                      if (checked) {
-                        setFormData({
-                          ...formData,
-                          tags: [...(formData.tags || []), tag.id || '']
-                        });
-                      } else {
-                        setFormData({
-                          ...formData,
-                          tags: (formData.tags || []).filter((t) => t !== tag.id)
-                        });
-                      }
-                    }}
-                    id={`tag-${tag.id}`}
-                  />
-                ))}
-              </div>
+            <div className="grid grid-cols-2 gap-2">
+              {tagCategories.map((tag) => (
+                <Checkbox
+                  key={tag.id}
+                  checked={formData.tags?.includes(tag.id || '') || false}
+                  onCheckedChange={(checked) => {
+                    if (checked) {
+                      setFormData({
+                        ...formData,
+                        tags: [...(formData.tags || []), tag.id || '']
+                      });
+                    } else {
+                      setFormData({
+                        ...formData,
+                        tags: (formData.tags || []).filter((t) => t !== tag.id)
+                      });
+                    }
+                  }}
+                  id={`tag-${tag.id}`}
+                />
+              ))}
             </div>
           </div>
 
@@ -431,69 +418,23 @@ export function CarDialog({ car, open, onOpenChange, onSave }: CarDialogProps) {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Location</h3>
             <div className="space-y-2">
-              <Label htmlFor="location">Location Name *</Label>
+              <Label htmlFor="locationName">Location Name *</Label>
               <Input
-                id="location"
-                value={formData.location?.name || ''}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    location: {
-                      name: e.target.value,
-                      coordinates: formData.location?.coordinates || { lat: 0, lng: 0 }
-                    }
-                  })
-                }
+                id="locationName"
+                value={formData.location?.name ?? ''}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  location: {
+                    name: e.target.value,
+                    coordinates: formData.location?.coordinates ?? { lat: 0, lng: 0 }
+                  }
+                })}
                 required
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="latitude">Latitude</Label>
-                <Input
-                  id="latitude"
-                  type="number"
-                  step="any"
-                  value={formData.location?.coordinates?.lat || 0}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      location: {
-                        name: formData.location?.name || '',
-                        coordinates: {
-                          lat: parseFloat(e.target.value),
-                          lng: formData.location?.coordinates?.lng || 0
-                        }
-                      }
-                    })
-                  }
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="longitude">Longitude</Label>
-                <Input
-                  id="longitude"
-                  type="number"
-                  step="any"
-                  value={formData.location?.coordinates?.lng || 0}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      location: {
-                        name: formData.location?.name || '',
-                        coordinates: {
-                          lat: formData.location?.coordinates?.lat || 0,
-                          lng: parseFloat(e.target.value)
-                        }
-                      }
-                    })
-                  }
-                />
-              </div>
-            </div>
           </div>
 
-          {/* Car Type (single dropdown, mapped to 'category') */}
+          {/* Car Type */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Car Type</h3>
             <div className="space-y-2">

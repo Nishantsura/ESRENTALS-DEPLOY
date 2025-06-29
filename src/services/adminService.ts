@@ -17,19 +17,69 @@ export class AdminService {
     return res.json();
   }
   static async createCar(car: Partial<Car>): Promise<Car> {
+    // Map camelCase to snake_case for DB
+    const carPayload = {
+      ...car,
+      daily_price: car.dailyPrice,
+      engine_capacity: car.engineCapacity,
+      fuel_type: car.fuelType,
+      power: car.power,
+      transmission: car.transmission,
+      seats: car.seats,
+      year: car.year,
+      brand_id: car.brand_id,
+      category: car.category,
+      tags: car.tags,
+      available: car.available,
+      featured: car.featured,
+      rare_car: car.rareCar,
+      description: car.description,
+      images: car.images,
+      type: car.type,
+      location: car.location,
+    };
+    delete carPayload.dailyPrice;
+    delete carPayload.engineCapacity;
+    delete carPayload.fuelType;
+    delete carPayload.rareCar;
     const res = await fetch(`${API_BASE}/cars`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(car),
+      body: JSON.stringify(carPayload),
     });
     if (!res.ok) throw new Error(await res.text());
     return res.json();
   }
   static async updateCar(id: string, car: Partial<Car>): Promise<Car> {
+    // Map camelCase to snake_case for DB
+    const carPayload = {
+      ...car,
+      daily_price: car.dailyPrice,
+      engine_capacity: car.engineCapacity,
+      fuel_type: car.fuelType,
+      power: car.power,
+      transmission: car.transmission,
+      seats: car.seats,
+      year: car.year,
+      brand_id: car.brand_id,
+      category: car.category,
+      tags: car.tags,
+      available: car.available,
+      featured: car.featured,
+      rare_car: car.rareCar,
+      description: car.description,
+      images: car.images,
+      type: car.type,
+      location: car.location,
+    };
+    delete carPayload.dailyPrice;
+    delete carPayload.engineCapacity;
+    delete carPayload.fuelType;
+    delete carPayload.rareCar;
     const res = await fetch(`${API_BASE}/cars/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(car),
+      body: JSON.stringify(carPayload),
     });
     if (!res.ok) throw new Error(await res.text());
     return res.json();

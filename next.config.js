@@ -29,6 +29,10 @@ const nextConfig = {
         pathname: '/**', // Allow all paths, including temp uploads
       },
     ],
+    domains: [
+      'qkryxmbzkobvscvmcqxxt.supabase.co',
+      // add any other domains you use for images
+    ],
   },
 }
 
